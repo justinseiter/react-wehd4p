@@ -52,19 +52,26 @@
 // }
 
 @mixin gl-font-size($gl-font-size, $gl-line-height: auto) {
-    font-size: ($gl-font-size / $gl-base-font-size) * 1rem;
+  font-size: ($gl-font-size / $gl-base-font-size) * 1rem;
 
-    @if $gl-line-height == auto {
-        line-height: ceil($gl-font-size / $gl-base-line-height) * ($gl-base-line-height / $gl-font-size);
-    } @else {
-        @if (type-of($gl-line-height) == number or $gl-line-height == inherit or $gl-line-height == normal) {
-            line-height: $gl-line-height;
-        } @elseif ($gl-line-height != none and $gl-line-height != false) {
-            @warn 'D’oh! ‘#{$gl-line-height}’ is not a valid value for `line-height`.';
-        }
+  @if $gl-line-height == auto {
+    line-height: ceil($gl-font-size / $gl-base-line-height) *
+      ($gl-base-line-height / $gl-font-size);
+  } @else {
+    @if (
+      type-of($gl-line-height) ==
+        number or
+        $gl-line-height ==
+        inherit or
+        $gl-line-height ==
+        normal
+    ) {
+      line-height: $gl-line-height;
+    } @else if ($gl-line-height != none and $gl-line-height != false) {
+      @warn 'D’oh! ‘#{$gl-line-height}’ is not a valid value for `line-height`.';
     }
+  }
 }
-
 
 ///*------------------------------------*\
 //    #WIDTHS
@@ -84,87 +91,81 @@ $gl-use-fractions: false !default;
 
 // Depending on what we chose for `$gl-use-fractions`, create the relevant
 // delimiter.
-@if ($gl-use-fractions == true) {
-    $gl-widths-delimiter: \/ !global;
-} @else {
-    $gl-widths-delimiter: -of- !global;
-}
-
+// @if ($gl-use-fractions == true) {
+//     $gl-widths-delimiter: \/ !global;
+// } @else {
+//     $gl-widths-delimiter: -of- !global;
+// }
+$gl-widths-delimiter: -of-;
 @mixin gl-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
-    // scss-lint:disable ImportantRule
-    // Loop through the number of columns for each denominator of our fractions.
-    @each $gl-widths-denominator in $gl-widths-columns {
-
-        // If we’re trying to make wholes, just spit a 100% width utility out
-        // one time only.
-        @if ($gl-widths-denominator == 1) {
-            @if ($gl-use-fractions == true) {
-                .#{$gl-widths-namespace}u-1-of-1#{$gl-widths-breakpoint} {
-                    width: 100% !important;
-                }
-            } @else {
-                .#{$gl-widths-namespace}u-1-1#{$gl-widths-breakpoint} {
-                    width: 100% !important;
-                }
-            }
-        } @else {
-
-            // Begin creating a numerator for our fraction up until we hit the
-            // denominator.
-            @for $gl-widths-numerator from 1 to $gl-widths-denominator {
-
-                // Build a class in the format `.u-3/4` or `.u-3-of-4`.
-                .#{$gl-widths-namespace}u-#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator}#{$gl-widths-breakpoint} {
-                    width: ($gl-widths-numerator / $gl-widths-denominator) * 100% !important;
-                }
-            }
+  // scss-lint:disable ImportantRule
+  // Loop through the number of columns for each denominator of our fractions.
+  @each $gl-widths-denominator in $gl-widths-columns {
+    // If we’re trying to make wholes, just spit a 100% width utility out
+    // one time only.
+    @if ($gl-widths-denominator == 1) {
+      @if ($gl-use-fractions == true) {
+        .#{$gl-widths-namespace}u-1-of-1#{$gl-widths-breakpoint} {
+          width: 100% !important;
         }
+      } @else {
+        .#{$gl-widths-namespace}u-1-1#{$gl-widths-breakpoint} {
+          width: 100% !important;
+        }
+      }
+    } @else {
+      // Begin creating a numerator for our fraction up until we hit the
+      // denominator.
+      @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+        // Build a class in the format `.u-3/4` or `.u-3-of-4`.
+        .#{$gl-widths-namespace}u-#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator}#{$gl-widths-breakpoint} {
+          width: ($gl-widths-numerator / $gl-widths-denominator) *
+            100% !important;
+        }
+      }
     }
+  }
 }
 
 @mixin gl-flex-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
-
-    @each $gl-widths-denominator in $gl-widths-columns {
-
-        // If we’re trying to make wholes, just spit a 100% width utility out
-        // one time only.
-        @if ($gl-widths-denominator == 1) {
-            .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--1-of-1 {
-                width: 100%;
-                flex-basis: auto;
-            }
-        } @else {
-
-            // Begin creating a numerator for our fraction up until we hit the
-            // denominator.
-            @for $gl-widths-numerator from 1 to $gl-widths-denominator {
-                .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
-                    width: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
-                    flex-basis: auto;
-                    flex-grow: 0;
-                }
-            }
+  @each $gl-widths-denominator in $gl-widths-columns {
+    // If we’re trying to make wholes, just spit a 100% width utility out
+    // one time only.
+    @if ($gl-widths-denominator == 1) {
+      .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--1-of-1 {
+        width: 100%;
+        flex-basis: auto;
+      }
+    } @else {
+      // Begin creating a numerator for our fraction up until we hit the
+      // denominator.
+      @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+        .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
+          width: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
+          flex-basis: auto;
+          flex-grow: 0;
         }
+      }
     }
+  }
 }
 
 @mixin gl-push-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
-
-    @each $gl-widths-denominator in $gl-widths-columns {
-        @if ($gl-widths-denominator == 1) {
-            // allow clearing of exisiting default push classes
-            .#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--0 {
-                margin-left: 0;
-            }
-        }
-        // Begin creating a numerator for our fraction up until we hit the
-        // denominator.
-        @for $gl-widths-numerator from 1 to $gl-widths-denominator {
-            .#{$gl-widths-namespace}#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
-                margin-left: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
-            }
-        }
+  @each $gl-widths-denominator in $gl-widths-columns {
+    @if ($gl-widths-denominator == 1) {
+      // allow clearing of exisiting default push classes
+      .#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--0 {
+        margin-left: 0;
+      }
     }
+    // Begin creating a numerator for our fraction up until we hit the
+    // denominator.
+    @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+      .#{$gl-widths-namespace}#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
+        margin-left: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
+      }
+    }
+  }
 }
 
 ///*------------------------------------*\
@@ -173,20 +174,20 @@ $gl-use-fractions: false !default;
 
 // Apply ‘attention’ styles in one go.
 @mixin attention($self: false) {
-    @if ($self != false) {
-        &,
-        &:hover,
-        &:active,
-        &:focus {
-            @content;
-        }
-    } @else {
-        &:hover,
-        &:active,
-        &:focus {
-            @content;
-        }
+  @if ($self != false) {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
     }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
 }
 
 ///*------------------------------------*\
@@ -196,88 +197,88 @@ $gl-use-fractions: false !default;
 // Generate Proxima-Nova’s numbered font-weights from their aliases.
 // https://typekit.com/fonts/proxima-nova
 @mixin font-weight($font-weight) {
-    @if ($font-weight == 'thin') {
-        font-weight: 100;
-    }
+  @if ($font-weight == 'thin') {
+    font-weight: 100;
+  }
 
-    @if ($font-weight == 'light') {
-        font-weight: 300;
-    }
+  @if ($font-weight == 'light') {
+    font-weight: 300;
+  }
 
-    @if ($font-weight == 'regular') {
-        font-weight: 400;
-    }
+  @if ($font-weight == 'regular') {
+    font-weight: 400;
+  }
 
-    @if ($font-weight == 'medium') {
-        font-weight: 500;
-    }
+  @if ($font-weight == 'medium') {
+    font-weight: 500;
+  }
 
-    @if ($font-weight == 'semibold') {
-        font-weight: 600;
-    }
+  @if ($font-weight == 'semibold') {
+    font-weight: 600;
+  }
 
-    @if ($font-weight == 'bold') {
-        font-weight: 700;
-    }
+  @if ($font-weight == 'bold') {
+    font-weight: 700;
+  }
 
-    @if ($font-weight == 'extrabold') {
-        font-weight: 800;
-    }
+  @if ($font-weight == 'extrabold') {
+    font-weight: 800;
+  }
 }
 
 @mixin ellipsis-base {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: bottom;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
 }
 
 @mixin ellipsis {
-    @include ellipsis-base;
-    min-width: 0;
-    padding-right: .5rem;
+  @include ellipsis-base;
+  min-width: 0;
+  padding-right: 0.5rem;
 }
 
 // Don't forget to include the full text in a title attribute.
 @mixin truncate($max-width: 200px) {
-    @include ellipsis-base;
-    max-width: $max-width;
+  @include ellipsis-base;
+  max-width: $max-width;
 }
 
 // Glasses focus mixin
 // $inset Boolean - if true will set box-shadow with 'inset' property; used in
 // dropdown selection options.
 @mixin input-focus-hover($inset: false) {
-    box-shadow: 0 0 0 1px $white, 0 0 0 4px $icy;
-    @if $inset {
-        box-shadow: inset 0 0 0 3px $icy, inset 0 0 0 4px $white;
-    }
-    outline: none;
+  box-shadow: 0 0 0 1px $white, 0 0 0 4px $icy;
+  @if $inset {
+    box-shadow: inset 0 0 0 3px $icy, inset 0 0 0 4px $white;
+  }
+  outline: none;
 }
 
 @mixin sentence-case {
-    text-transform: lowercase;
-    animation: repaintHack .00000001s;
+  text-transform: lowercase;
+  animation: repaintHack 0.00000001s;
 
-    &::first-letter {
-        text-transform: capitalize;
-    }
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 @-moz-keyframes repaintHack {
-    0% {
-        text-transform: inherit;
-    }
+  0% {
+    text-transform: inherit;
+  }
 }
 
 // rinse-button will eliminate browser defaults totally
 // but still provide focus state
 @mixin rinse-button {
-    background: transparent;
-    border: 0;
-    padding: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
 
-    &:focus {
-        @include input-focus-hover();
-    }
+  &:focus {
+    @include input-focus-hover();
+  }
 }

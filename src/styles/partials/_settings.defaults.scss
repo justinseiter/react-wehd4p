@@ -10,13 +10,11 @@
 // These variables are global defaults; they should not be modified or
 // adjusted directly; you should predefine the variables in your own project.
 
-
 // High-level base settings.
-$gl-base-font-size:        16px !default;
-$gl-base-line-height:      22px !default;
-$gl-base-text-color:       $gray-900 !default;
+$gl-base-font-size: 16px !default;
+$gl-base-line-height: 22px !default;
+$gl-base-text-color: $gray-900 !default;
 $gl-base-background-color: $white !default;
-
 
 // Namespace.
 //
@@ -29,7 +27,6 @@ $gl-namespace: null !default;
 // $gl-grid-row-class: 'layout' !default;
 // $gl-grid-col-class: 'layout__item' !default;
 // $gl-grid-offset-class: 'push' !default;
-
 
 // These variables are framework variables, sourced from variables defined
 // above. Feel free to use these variables throughout your project, but do not

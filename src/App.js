@@ -10,7 +10,7 @@ export default function App() {
       <p className="graph graph--loud">
         Start editing to see some magic happen :)
       </p>
-      <Button>Hi</Button>
+      <Button type="primary">Hi</Button>
     </div>
   );
 }
