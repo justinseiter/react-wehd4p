@@ -1,0 +1,45 @@
+///*------------------------------------*\
+//    #FUNCTIONS
+//\*------------------------------------*/
+
+// glasses makes use of a few functions that are also available for you to use
+// later on in your extension of the framework.
+
+// Maths helpers.
+//
+// Halve and double numbers, returning rounded integers. E.g.:
+//
+// .foo {
+//     padding: halve(3.2px);
+// }
+//
+@function quarter($gl-number) {
+    @return round($gl-number / 4);
+}
+
+@function halve($gl-number) {
+    @return round($gl-number / 2);
+}
+
+@function double($gl-number) {
+    @return round($gl-number * 2);
+}
+
+@function quadruple($gl-number) {
+    @return round($gl-number * 4);
+}
+
+
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}

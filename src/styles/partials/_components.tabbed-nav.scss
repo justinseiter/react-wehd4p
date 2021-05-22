@@ -1,0 +1,101 @@
+/* ------------------------------------ *\
+    #TABBED_NAV
+\* ------------------------------------ */
+
+$group-bg-color: $white;
+$group-border-width: 2px;
+$group-border-color: $gray-200;
+$tab-hover-border-color: $gray-700;
+$tab-selected-border-color: $blue;
+$tab-font-size: 14px;
+$tab-font-color: $gray-700;
+$tab-selected-font-color: $black;
+$tab-height: 32px;
+$tab-spacing: 30px;
+$tab-padding: 12px;
+$gl-padding: $gl-base-spacing-unit !default;
+
+
+// Contains the row of tabbed navigation and the content that it controls
+.c-tab-group {
+    width: 100%;
+}
+
+// A container for a single row of tabs
+.c-tab-group__row {
+    display: flex;
+    align-items: stretch;
+    background-color: $group-bg-color;
+    border-bottom: $group-border-width solid $group-border-color;
+}
+
+// A single tab
+.c-tab {
+    @include font-weight('regular');
+    @include gl-font-size($tab-font-size, none);
+    height: $tab-height;
+    display: flex;
+    align-items: center;
+    margin-left: $tab-spacing;
+    margin-bottom: -2px;
+    border: 0;
+    border-bottom: 2px solid $group-border-color;
+    transition: border-color .1s ease-out;
+    background: transparent;
+
+    &:hover {
+        border-color: $tab-hover-border-color;
+    }
+
+    &:focus {
+        @include input-focus-hover;
+    }
+
+    &.is-selected {
+        border-bottom: 2px solid $tab-selected-border-color;
+        pointer-events: none;
+    }
+
+    &.has-dot {
+        position: relative;
+
+        &::after {
+            background: $blam-400;
+            border-radius: 50%;
+            content: '';
+            height: 5px;
+            position: absolute;
+            right: -5px;
+            top: 5px;
+            width: 5px;
+        }
+    }
+}
+
+// The text within a tab
+.c-tab__label {
+    @include sentence-case;
+    @include font-weight('bold');
+
+    &--custom-case {
+        text-transform: inherit;
+    }
+
+    &.is-selected {
+        color: $tab-selected-font-color;
+    }
+}
+
+.c-tab__label,
+.c-tab__label:hover {
+    color: $tab-font-color;
+}
+
+// The container for the currently selected content
+.c-tab-group__content {
+    padding: $gl-padding;
+
+    &:focus {
+        @include input-focus-hover;
+    }
+}

@@ -1,0 +1,109 @@
+/////////////////////////////////////////////////////////////////
+// Component styles for notification banner.                   //
+/////////////////////////////////////////////////////////////////
+
+$notification-colors: (
+    themes: (
+        info: (
+            fill: $inky-100,
+            stroke: $inky-100
+        ),
+        error: (
+            fill: $blam-100,
+            stroke: $blam-100
+        ),
+        warning: (
+            fill: $buttery-100,
+            stroke: $buttery-100
+        ),
+        important: (
+            fill: $icy-100,
+            stroke: $icy-100
+        ),
+        success: (
+            fill: $slime-100,
+            stroke: $slime-100
+        )
+    )
+);
+
+$notification-height: auto;
+$notification-min-height: 30px;
+$notification-margin: 0;
+$notification-padding: 4px 32px 4px 16px;
+$notification-width: 100%;
+
+$notification-message-color: $black;
+$notification-message-font-size: 14px;
+
+.c-notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $notification-height;
+    min-height: $notification-min-height;
+    margin: $notification-margin;
+    overflow: hidden;
+    position: relative;
+    width: $notification-width;
+
+    a {
+        color: $black;
+        text-decoration: underline;
+    }
+
+    @each $theme in map-keys(map-get($notification-colors, themes)) {
+        &--#{$theme} {
+            background-color: map-deep-get($notification-colors, themes, $theme, fill);
+            border-bottom: 1px solid map-deep-get($notification-colors, themes, $theme, stroke);
+            border-top: 1px solid map-deep-get($notification-colors, themes, $theme, stroke);
+        }
+    }
+}
+
+.c-notification__content {
+    @include font-weight('semibold');
+    color: $notification-message-color;
+    font-size: $notification-message-font-size;
+    padding: $notification-padding;
+    text-align: center;
+    vertical-align: middle;
+    width: auto;
+}
+
+.c-notification__close {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    line-height: 0;
+
+    &:focus {
+        @include input-focus-hover;
+    }
+}
+
+.notification-enter,
+.notification-appear {
+    opacity: .01;
+    visibility: visible;
+}
+
+.notification-appear.notification-appear-active,
+.notification-enter.notification-enter-active {
+    opacity: 1;
+    transition: all 300ms ease-out;
+}
+
+.notification-leave {
+    opacity: 1;
+    visibility: hidden;
+}
+
+.notification-leave.notification-leave-active {
+    opacity: .01;
+    transition: all 300ms ease-out;
+}

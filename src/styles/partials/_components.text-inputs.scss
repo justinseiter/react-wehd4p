@@ -1,0 +1,57 @@
+///////////////////////////////////////////////////////////
+// $input- variables are defined in _objects.forms.scss
+///////////////////////////////////////////////////////////
+
+.c-text-field,
+.c-text-area,
+.c-number-field {
+    position: relative;
+    min-width: 50px;
+}
+
+.c-text-field__input,
+.c-text-area__input,
+.c-number-field__input {
+    width: 100%;
+    border: 1px solid $gray-600;
+    padding: 8px 30px 8px 12px;
+
+    &:focus {
+        @include input-focus-hover;
+    }
+
+    &:hover,
+    &:active {
+        border-color: $input-active-color;
+        outline: none;
+    }
+
+    &--error {
+        border-color: $input-error-color;
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+}
+
+.c-number-field__input {
+    padding-right: 5px;
+}
+
+.c-text-area__input {
+    min-height: 96px;
+}
+
+.c-text-field__icon,
+.c-number-field__icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 15px;
+    bottom: 8px;
+}
+
+.c-number-field__icon {
+    right: 20px;
+}

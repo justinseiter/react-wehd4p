@@ -1,0 +1,54 @@
+$tooltip-arrow-offset: -4px;
+
+.c-tooltip {
+    @include font-weight(regular);
+    background: $white;
+    color: $black;
+    padding: 6px 12px;
+    border-radius: 4px;
+    z-index: 1;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+    white-space: pre;
+
+    &__arrow,
+    &__arrow::before {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+    }
+
+    &__arrow::before {
+        content: '';
+        transform: rotate(45deg);
+        background: $white;
+
+    }
+
+    [data-placement^='top'] > &__arrow {
+        bottom: $tooltip-arrow-offset;
+        &::before {
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, .15);
+        }
+    }
+
+    [data-placement^='right'] > &__arrow {
+        left: $tooltip-arrow-offset;
+        &::before {
+            box-shadow: -2px 2px 4px rgba(0, 0, 0, .15);
+        }
+    }
+
+    [data-placement^='bottom'] > &__arrow {
+        top: $tooltip-arrow-offset;
+        &::before {
+            box-shadow: -2px -2px 4px rgba(0, 0, 0, .15);
+        }
+    }
+
+    [data-placement^='left'] > &__arrow {
+        right: $tooltip-arrow-offset;
+        &::before {
+            box-shadow: 2px -2px 4px rgba(0, 0, 0, .15);
+        }
+    }
+}

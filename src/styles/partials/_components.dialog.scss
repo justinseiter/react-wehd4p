@@ -1,0 +1,57 @@
+$dialog-text-spacing: 24px;
+$dialog-icon-size: 36px;
+
+.c-dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.c-dialog__icon {
+    width: $dialog-icon-size;
+    height: $dialog-icon-size;
+    margin-bottom: 18px;
+
+    // fixes for the warning icon size
+    .c-icon--triangle-exclamation {
+        width: 43px;
+        margin-left: -3px;
+        margin-top: -2px;
+    }
+}
+
+.c-dialog__heading {
+    @include gl-font-size(24px, 30px);
+    color: $black;
+    max-width: 100%;
+    margin-bottom: 14px;
+}
+
+.c-dialog__text {
+    @include gl-font-size(14px, 18px);
+    color: $gray-700;
+    max-width: 100%;
+    margin-bottom: 14px;
+
+    &:last-of-type {
+        margin-bottom: 42px;
+    }
+
+    &--error {
+        color: $blam-700;
+    }
+
+    &--scrollable {
+        border: {
+            color: $gray-200;
+            style: solid;
+            width: 2px 0;
+        }
+        flex-shrink: 1;
+        overflow-y: scroll;
+        padding: 20px 0;
+        width: 100%;
+    }
+}

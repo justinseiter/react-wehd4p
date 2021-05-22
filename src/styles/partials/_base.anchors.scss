@@ -1,0 +1,17 @@
+/* ------------------------------------ *\
+    #ANCHORS
+\* ------------------------------------ */
+
+a {
+    @include font-weight(bold);
+    @include attention() {
+        cursor: pointer;
+    }
+
+    &:focus {
+        @include input-focus-hover;
+    }
+    color: $blue;
+    text-decoration: none;
+    transition: color .1s;
+}

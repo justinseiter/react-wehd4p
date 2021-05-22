@@ -1,0 +1,14 @@
+$sidebar-bg: $gray-900;
+
+.o-app__sidebar {
+    width: 205px;
+    position: fixed;
+    min-height: 100vh;
+    background-color: $sidebar-bg;
+}
+
+.o-app__main-content {
+    padding-left: 235px;
+    padding-right: 30px;
+    min-height: 100vh;
+}

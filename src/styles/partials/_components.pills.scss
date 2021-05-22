@@ -1,0 +1,60 @@
+.c-pill {
+    @include ellipsis;
+    @include gl-font-size(12px);
+    @include font-weight(bold);
+    align-items: center;
+    background: $gray-200;
+    border-radius: 2px;
+    border: 1px solid $gray-200;
+    color: $black;
+    display: inline-flex;
+    height: 18px;
+    justify-content: flex-start;
+    max-width: 100%;
+    padding: 0 4px;
+
+    &__content {
+        @include ellipsis;
+        @include sentence-case;
+        padding-right: 0;
+    }
+
+    &--rounded {
+        @include gl-font-size(12px);
+        background: $gray-200;
+        border-radius: 12px;
+        border: 0;
+        color: $black;
+        padding: 0;
+
+        .c-pill__content {
+            @include sentence-case;
+            line-height: 11px;
+            padding: 0 8px;
+        }
+    }
+
+    &--info {
+        background: $gray-200;
+        border: 1px solid $gray-200;
+    }
+
+    &--error {
+        background: $blam-200;
+        border: 1px solid $blam-200;
+    }
+
+    &--success {
+        background: $slime-200;
+        border: 1px solid $slime-200;
+    }
+
+    &--warning {
+        background: $buttery-200;
+        border: 1px solid $buttery-200;
+    }
+
+    &--truncate .c-pill__content {
+        @include truncate(100px);
+    }
+}

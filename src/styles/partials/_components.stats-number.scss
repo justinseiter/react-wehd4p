@@ -1,0 +1,39 @@
+.o-stats-numbers-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.c-stats-number {
+    @include gl-font-size(14px, 1);
+    @include font-weight(semibold);
+    color: $black;
+
+    &__values {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 6px;
+    }
+
+    &__display-number {
+        @include gl-font-size(24px, 1);
+        @include font-weight(bold);
+        margin: 0;
+    }
+
+    &__percent-change {
+        display: flex;
+        margin-left: 15px;
+
+        &--pos {
+            color: $slime-600;
+        }
+
+        &--neg {
+            color: $blam-600;
+        }
+
+        &--evn {
+            color: $gray-700;
+        }
+    }
+}

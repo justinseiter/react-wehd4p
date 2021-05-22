@@ -1,0 +1,105 @@
+$track-color: $gray-300;
+
+$thumb-color: $white;
+$thumb-radius: 100%;
+$thumb-height: 16px;
+$thumb-width: 16px;
+$thumb-border-width: 1px;
+$thumb-border-color: $gray-500;
+
+$track-width: 100%;
+$track-height: 6px;
+$track-border-width: 0;
+$track-border-color: transparent;
+
+$track-radius: 15px;
+
+@mixin track {
+    cursor: default;
+    height: $track-height;
+    transition: all .2s ease;
+    width: $track-width;
+}
+
+@mixin thumb {
+    background: $thumb-color;
+    border: $thumb-border-width solid $thumb-border-color;
+    border-radius: $thumb-radius;
+    cursor: default;
+    height: $thumb-height;
+    width: $thumb-width;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+}
+
+.c-range-input {
+    -webkit-appearance: none;
+    background: transparent;
+    margin: $thumb-height / 2 0;
+    width: $track-width;
+    padding: 0;
+
+    &:focus {
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            @include input-focus-hover;
+        }
+
+        &::-ms-thumb {
+            @include input-focus-hover;
+        }
+
+        &::-moz-range-thumb {
+            @include input-focus-hover;
+        }
+    }
+
+    &::-moz-focus-outer {
+        border: 0;
+    }
+
+    &::-webkit-slider-runnable-track {
+        @include track;
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius;
+    }
+
+    &::-webkit-slider-thumb {
+        @include thumb;
+        -webkit-appearance: none;
+        margin-top: ((-$track-border-width * 2 + $track-height) / 2 - $thumb-height / 2);
+    }
+
+    &::-moz-range-track {
+        @include track;
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius;
+    }
+
+    &::-moz-range-thumb {
+        @include thumb;
+    }
+
+    &::-ms-track {
+        @include track;
+        background: transparent;
+        border-color: transparent;
+        border-width: ($thumb-height / 2) 0;
+        color: transparent;
+    }
+
+    &::-ms-fill-lower,
+    &::-ms-fill-upper {
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: ($track-radius * 2);
+    }
+
+    &::-ms-thumb {
+        @include thumb;
+        margin-top: $track-height / 8;
+    }
+}

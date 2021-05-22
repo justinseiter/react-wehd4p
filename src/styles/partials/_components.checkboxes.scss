@@ -1,0 +1,112 @@
+/* ------------------------------------ *\
+    #CHECKBOXES
+\* ------------------------------------ */
+// Adapted from Lea Verou's CSS Secrets recipe http://bit.ly/1RAvUeb
+
+
+// Color Settings
+$bg-color: $white;
+$bg-color--checked: $blue;
+$border-color: $gray-700;
+$border-color--hover: $blue;
+$checkmark-color: $white;
+$label-color: $black;
+$label-font-size: $gl-base-font-size;
+$checkbox-size: 16px;
+$transition: all .1s;
+
+
+// SETUP ///////////////
+.c-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.c-checkbox__input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.c-checkbox__label {
+    color: $label-color;
+
+    &:hover {
+        cursor: pointer;
+
+        &::before {
+            border-color: $border-color--hover;
+        }
+    }
+}
+
+
+// BOX ///////////////
+.c-checkbox__label::before {
+    content: '';
+    display: inline-block;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+    text-indent: .15em;
+    transition: $transition;
+    position: relative;
+    top: 3px;
+
+    // BOX--CHECKED ///////////////
+    .c-checkbox__input:checked + & {
+        background-color: $bg-color--checked;
+        border-color: $bg-color--checked;
+        color: $bg-color;
+    }
+
+    // BOX--FOCUSED ///////////////
+    .c-checkbox__input:focus + & {
+        @include input-focus-hover;
+    }
+}
+
+.c-checkbox__label-text {
+    padding-left: .5em;
+}
+
+// CHECKMARK ///////////////
+.c-checkbox__label::after {
+    content: '';
+    width: 9px;
+    height: 5.5px;
+    position: absolute;
+    top: 6.5px;
+    left: 4px;
+    background: transparent;
+    transform: rotate(-45deg);
+    border: 3px solid;
+    border-color: $checkmark-color;
+    opacity: 0;
+
+    // CHECKMARK--MULTI ///////////////
+    .is-multi-checkbox + & {
+        width: 8px;
+        top: 6.5px;
+        left: 4px;
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-width: 2px;
+        transform: rotate(0);
+    }
+
+    // CHECKMARK--CHECKED ///////////////
+    .c-checkbox__input:checked + & {
+        border-top: 0;
+        border-right: 0;
+        opacity: 1;
+        border-width: 2px;
+    }
+}

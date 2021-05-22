@@ -1,0 +1,17 @@
+$ms-height: 36px;
+$ms-round: 3px;
+$ms-border: 1px solid $gray-600;
+$ms-bg: $white;
+$gl-padding: $gl-base-spacing-unit !default;
+$gl-padding--small: halve($gl-padding) !default;
+
+.c-multi-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $ms-height;
+    border: $ms-border;
+    border-radius: $ms-round;
+    background: $ms-bg;
+    padding: $gl-padding--small $gl-padding;
+}

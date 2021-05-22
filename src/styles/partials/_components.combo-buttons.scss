@@ -1,0 +1,36 @@
+.c-combo-btn {
+    display: inline-block;
+    min-width: 100px;
+
+    &__control {
+        display: flex;
+    }
+
+    &__drop-btn {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: 1px;
+        min-width: 0;
+        padding: 0 21px 0 13px;
+        width: 10px;
+
+        .c-dropdown__icon {
+            width: 7px;
+            height: 7px;
+        }
+    }
+
+    &__main-btn {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .c-dropdown {
+        display: block;
+
+        &__content {
+            margin-top: 5px;
+            width: 100%;
+        }
+    }
+}

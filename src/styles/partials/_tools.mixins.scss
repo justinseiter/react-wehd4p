@@ -1,0 +1,283 @@
+///*------------------------------------*\
+//    #MIXINS
+//\*------------------------------------*/
+
+///*------------------------------------*\
+//    #FONT SIZING
+//\*------------------------------------*/
+
+// Create a fully formed type style (sizing and vertical rhythm) by passing in a
+// single value, e.g.:
+//
+// .foo {
+//     @include gl-font-size(12px);
+// }
+//
+// This will generate a rem-based font-size with its pixel fallback, as well as
+// a unitless line-height which will place the element on your baseline, e.g.:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+//     line-height: 2;
+// }
+//
+// If you do not want gl to generate you a line-height automatically, you
+// simply pass in your own as a second paramater:
+//
+// .foo {
+//     @include gl-font-size(12px, 1.5);
+// }
+//
+// This will yield:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+//     line-height: 1.5;
+// }
+//
+// This parameter can be any integer, ‘inherit’, or ‘normal’. If you don’t want
+// a line-height at all, pass in a second paramater of ‘none’ or ‘false’:
+//
+// .foo {
+//     @include gl-font-size(12px, none);
+// }
+//
+// This will yield:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+// }
+
+@mixin gl-font-size($gl-font-size, $gl-line-height: auto) {
+    font-size: ($gl-font-size / $gl-base-font-size) * 1rem;
+
+    @if $gl-line-height == auto {
+        line-height: ceil($gl-font-size / $gl-base-line-height) * ($gl-base-line-height / $gl-font-size);
+    } @else {
+        @if (type-of($gl-line-height) == number or $gl-line-height == inherit or $gl-line-height == normal) {
+            line-height: $gl-line-height;
+        } @elseif ($gl-line-height != none and $gl-line-height != false) {
+            @warn 'D’oh! ‘#{$gl-line-height}’ is not a valid value for `line-height`.';
+        }
+    }
+}
+
+
+///*------------------------------------*\
+//    #WIDTHS
+//\*------------------------------------*/
+// A mixin to spit out our width classes. Pass in the columns we want the widths
+// to have, and an optional suffix for responsive widths. E.g. to create thirds
+// and quarters for a small breakpoint:
+//
+// @include gl-widths(3 4, -sm);
+
+// Predefine the variables below in order to alter and enable specific features.
+$gl-widths-namespace: $gl-namespace !default;
+
+// Do we want to use classes like `<div class="u-1/4">` instead of
+// `<div class="u-1-of-4">`?
+$gl-use-fractions: false !default;
+
+// Depending on what we chose for `$gl-use-fractions`, create the relevant
+// delimiter.
+@if ($gl-use-fractions == true) {
+    $gl-widths-delimiter: \/ !global;
+} @else {
+    $gl-widths-delimiter: -of- !global;
+}
+
+@mixin gl-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
+    // scss-lint:disable ImportantRule
+    // Loop through the number of columns for each denominator of our fractions.
+    @each $gl-widths-denominator in $gl-widths-columns {
+
+        // If we’re trying to make wholes, just spit a 100% width utility out
+        // one time only.
+        @if ($gl-widths-denominator == 1) {
+            @if ($gl-use-fractions == true) {
+                .#{$gl-widths-namespace}u-1-of-1#{$gl-widths-breakpoint} {
+                    width: 100% !important;
+                }
+            } @else {
+                .#{$gl-widths-namespace}u-1-1#{$gl-widths-breakpoint} {
+                    width: 100% !important;
+                }
+            }
+        } @else {
+
+            // Begin creating a numerator for our fraction up until we hit the
+            // denominator.
+            @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+
+                // Build a class in the format `.u-3/4` or `.u-3-of-4`.
+                .#{$gl-widths-namespace}u-#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator}#{$gl-widths-breakpoint} {
+                    width: ($gl-widths-numerator / $gl-widths-denominator) * 100% !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin gl-flex-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
+
+    @each $gl-widths-denominator in $gl-widths-columns {
+
+        // If we’re trying to make wholes, just spit a 100% width utility out
+        // one time only.
+        @if ($gl-widths-denominator == 1) {
+            .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--1-of-1 {
+                width: 100%;
+                flex-basis: auto;
+            }
+        } @else {
+
+            // Begin creating a numerator for our fraction up until we hit the
+            // denominator.
+            @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+                .#{$gl-widths-namespace}u-flex#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
+                    width: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
+                    flex-basis: auto;
+                    flex-grow: 0;
+                }
+            }
+        }
+    }
+}
+
+@mixin gl-push-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
+
+    @each $gl-widths-denominator in $gl-widths-columns {
+        @if ($gl-widths-denominator == 1) {
+            // allow clearing of exisiting default push classes
+            .#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--0 {
+                margin-left: 0;
+            }
+        }
+        // Begin creating a numerator for our fraction up until we hit the
+        // denominator.
+        @for $gl-widths-numerator from 1 to $gl-widths-denominator {
+            .#{$gl-widths-namespace}#{$gl-grid-offset-class}#{$gl-widths-breakpoint}--#{$gl-widths-numerator}#{$gl-widths-delimiter}#{$gl-widths-denominator} {
+                margin-left: ($gl-widths-numerator / $gl-widths-denominator) * 100%;
+            }
+        }
+    }
+}
+
+///*------------------------------------*\
+//    #ANCHOR STATES MIXIN
+//\*------------------------------------*/
+
+// Apply ‘attention’ styles in one go.
+@mixin attention($self: false) {
+    @if ($self != false) {
+        &,
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    } @else {
+        &:hover,
+        &:active,
+        &:focus {
+            @content;
+        }
+    }
+}
+
+///*------------------------------------*\
+//    #FONT WEIGHTS
+//\*------------------------------------*/
+
+// Generate Proxima-Nova’s numbered font-weights from their aliases.
+// https://typekit.com/fonts/proxima-nova
+@mixin font-weight($font-weight) {
+    @if ($font-weight == 'thin') {
+        font-weight: 100;
+    }
+
+    @if ($font-weight == 'light') {
+        font-weight: 300;
+    }
+
+    @if ($font-weight == 'regular') {
+        font-weight: 400;
+    }
+
+    @if ($font-weight == 'medium') {
+        font-weight: 500;
+    }
+
+    @if ($font-weight == 'semibold') {
+        font-weight: 600;
+    }
+
+    @if ($font-weight == 'bold') {
+        font-weight: 700;
+    }
+
+    @if ($font-weight == 'extrabold') {
+        font-weight: 800;
+    }
+}
+
+@mixin ellipsis-base {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+
+@mixin ellipsis {
+    @include ellipsis-base;
+    min-width: 0;
+    padding-right: .5rem;
+}
+
+// Don't forget to include the full text in a title attribute.
+@mixin truncate($max-width: 200px) {
+    @include ellipsis-base;
+    max-width: $max-width;
+}
+
+// Glasses focus mixin
+// $inset Boolean - if true will set box-shadow with 'inset' property; used in
+// dropdown selection options.
+@mixin input-focus-hover($inset: false) {
+    box-shadow: 0 0 0 1px $white, 0 0 0 4px $icy;
+    @if $inset {
+        box-shadow: inset 0 0 0 3px $icy, inset 0 0 0 4px $white;
+    }
+    outline: none;
+}
+
+@mixin sentence-case {
+    text-transform: lowercase;
+    animation: repaintHack .00000001s;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+@-moz-keyframes repaintHack {
+    0% {
+        text-transform: inherit;
+    }
+}
+
+// rinse-button will eliminate browser defaults totally
+// but still provide focus state
+@mixin rinse-button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+
+    &:focus {
+        @include input-focus-hover();
+    }
+}

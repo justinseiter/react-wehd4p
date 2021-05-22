@@ -1,0 +1,118 @@
+$meter-bar-border-radius: 3px;
+$meter-bar-colors: (
+    themes: (
+        safe: (
+            primaryFill:   $blue,
+            secondaryFill: $icy-400
+        ),
+        overage:       (
+            primaryFill:   $blam-500,
+            secondaryFill: $blam-200
+        ),
+        warning:     (
+            primaryFill:   $buttery-600,
+            secondaryFill: $buttery-400
+        )
+    )
+);
+
+.o-meter-bar {
+    box-sizing: border-box;
+    position: relative;
+
+    .o-meter-bar__header {
+        @include font-weight('regular');
+        color: $gray-900;
+
+        .o-meter-bar__title {
+            @include gl-font-size(16px, 24px);
+        }
+
+        .o-meter-bar__stats {
+            @include gl-font-size(14px);
+            position: absolute;
+            right: 0;
+
+            span:first-child {
+                font-weight: 600;
+            }
+        }
+    }
+
+    .o-meter-bar__meter-outer {
+        font-size: 0;
+        width: 100%;
+        border: 2px solid $gray-600;
+        border-radius: $meter-bar-border-radius;
+    }
+
+    .o-meter-bar__body {
+        background: $white;
+        border-radius: $meter-bar-border-radius;
+        width: 100%;
+
+        &--full {
+            background: none;
+        }
+    }
+
+    .o-meter-bar__meter-inner {
+        display: inline-block;
+        height: 6px;
+    }
+
+    .o-meter-bar__meter-inner--secondary {
+        border-left: 0;
+    }
+
+    .o-meter-bar__footer {
+        @include gl-font-size(14px);
+        display: flex;
+        padding-top: 12px;
+    }
+
+    .o-meter-bar__data-point {
+        display: block;
+
+        &::before {
+            border-radius: $meter-bar-border-radius;
+            content: ' ';
+            display: inline-block;
+            height: 12px;
+            margin-right: 8px;
+            position: relative;
+            top: 2px;
+            width: 12px;
+        }
+
+        strong {
+            @include font-weight('semibold');
+        }
+
+        &--primary {
+            padding-right: 19px;
+        }
+    }
+
+    @each $theme in map-keys(map-get($meter-bar-colors, themes)) {
+        &.o-meter-bar--#{$theme} {
+            .o-meter-bar__meter-inner--primary {
+                background: map-deep-get($meter-bar-colors, themes, $theme, primaryFill);
+            }
+
+            .o-meter-bar__meter-inner--secondary {
+                background: map-deep-get($meter-bar-colors, themes, $theme, secondaryFill);
+            }
+
+            .o-meter-bar__data-point {
+                &::before {
+                    background: map-deep-get($meter-bar-colors, themes, $theme, primaryFill);
+                }
+
+                &--secondary::before {
+                    background: map-deep-get($meter-bar-colors, themes, $theme, secondaryFill);
+                }
+            }
+        }
+    }
+}

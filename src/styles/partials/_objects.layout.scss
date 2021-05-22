@@ -1,0 +1,239 @@
+/* ------------------------------------ *\
+    #LAYOUT
+\* ------------------------------------ */
+
+/**
+ * This is a copy of the InuitCSS grid system. https://github.com/inuitcss/objects.layout
+ *
+ * The gl layout system uses `box-sizing: border-box;` and
+ * `display: inline-block;` to create an extremely powerful, flexible
+ * alternative to the traditional grid system. Combine the layout items with
+ * the widths found in `trumps.widths`.
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$gl-layout-namespace: $gl-namespace !default;
+
+$gl-layout-gutter: $gl-base-spacing-unit !default;
+$gl-layout-gutter--tiny: quarter($gl-layout-gutter) !default;
+$gl-layout-gutter--small: halve($gl-layout-gutter) !default;
+$gl-layout-gutter--large: double($gl-layout-gutter) !default;
+$gl-layout-gutter--huge: quadruple($gl-layout-gutter) !default;
+
+$gl-enable-layout--tiny: false !default;
+$gl-enable-layout--small: false !default;
+$gl-enable-layout--large: false !default;
+$gl-enable-layout--huge: false !default;
+$gl-enable-layout--flush: false !default;
+$gl-enable-layout--rev: false !default;
+$gl-enable-layout--middle: false !default;
+$gl-enable-layout--bottom: false !default;
+$gl-enable-layout--right: false !default;
+$gl-enable-layout--center: false !default;
+$gl-enable-layout--auto: false !default;
+// Here we set a variable assuming that `box-sizing: border-box;` is not set
+// globally. If it has been previously been defined, the following variable will
+// be overriden and will be set to `true`.
+$gl-global-border-box: false !default;
+
+/**
+ * Begin a layout group.
+ */
+.#{$gl-layout-namespace}layout,
+%#{$gl-layout-namespace}layout {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: -$gl-layout-gutter;
+}
+
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+.#{$gl-layout-namespace}layout__item,
+%#{$gl-layout-namespace}layout__item {
+    display: inline-block; /* [1] */
+    padding-left: $gl-layout-gutter; /* [2] */
+    vertical-align: top; /* [3] */
+    width: 100%; /* [4] */
+
+    @if $gl-global-border-box == false {
+        box-sizing: border-box; /* [5] */
+    }
+}
+
+@if ($gl-enable-layout--tiny == true) {
+    /**
+     * Layouts with tiny gutters.
+     */
+
+    .#{$gl-layout-namespace}layout--tiny,
+    %#{$gl-layout-namespace}layout--tiny {
+        margin-left: -($gl-layout-gutter--tiny);
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            padding-left: $gl-layout-gutter--tiny;
+        }
+    }
+}
+
+@if ($gl-enable-layout--small == true) {
+    /**
+     * Layouts with small gutters.
+     */
+
+    .#{$gl-layout-namespace}layout--small,
+    %#{$gl-layout-namespace}layout--small {
+        margin-left: -($gl-layout-gutter--small);
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            padding-left: $gl-layout-gutter--small;
+        }
+    }
+}
+
+@if ($gl-enable-layout--large == true) {
+    /**
+     * Layouts with large gutters.
+     */
+
+    .#{$gl-layout-namespace}layout--large,
+    %#{$gl-layout-namespace}layout--large {
+        margin-left: -($gl-layout-gutter--large);
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            padding-left: $gl-layout-gutter--large;
+        }
+    }
+}
+
+@if ($gl-enable-layout--huge == true) {
+    /**
+     * Layouts with huge gutters.
+     */
+
+    .#{$gl-layout-namespace}layout--huge,
+    %#{$gl-layout-namespace}layout--huge {
+        margin-left: -($gl-layout-gutter--huge);
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            padding-left: $gl-layout-gutter--huge;
+        }
+    }
+}
+
+@if ($gl-enable-layout--flush == true) {
+    /**
+     * Layouts with no gutters.
+     */
+
+    .#{$gl-layout-namespace}layout--flush,
+    %#{$gl-layout-namespace}layout--flush {
+        margin-left: 0;
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            padding-left: 0;
+        }
+    }
+}
+
+@if ($gl-enable-layout--rev == true) {
+    /**
+     * Reversed rendered order of layout items, e.g. items 1, 2, 3, 4 in your
+     * markup will display in order 4, 3, 2, 1 on your page.
+     */
+
+    .#{$gl-layout-namespace}layout--rev,
+    %#{$gl-layout-namespace}layout--rev {
+        direction: rtl;
+        text-align: left;
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            direction: ltr;
+            text-align: left;
+        }
+    }
+}
+
+@if ($gl-enable-layout--middle == true) {
+    /**
+     * Align layout items to the vertical centers of each other.
+     */
+
+    .#{$gl-layout-namespace}layout--middle,
+    %#{$gl-layout-namespace}layout--middle {
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            vertical-align: middle;
+        }
+    }
+}
+
+@if ($gl-enable-layout--bottom == true) {
+    /**
+     * Align layout items to the vertical bottoms of each other.
+     */
+
+    .#{$gl-layout-namespace}layout--bottom,
+    %#{$gl-layout-namespace}layout--bottom {
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            vertical-align: bottom;
+        }
+    }
+}
+
+@if ($gl-enable-layout--right == true) {
+    /**
+     * Make the layout items fill up from the right hand side.
+     */
+
+    .#{$gl-layout-namespace}layout--right,
+    %#{$gl-layout-namespace}layout--right {
+        text-align: right;
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            text-align: left;
+        }
+    }
+}
+
+@if ($gl-enable-layout--center == true) {
+    /**
+     * Make the layout items fill up from the center outward.
+     */
+
+    .#{$gl-layout-namespace}layout--center,
+    %#{$gl-layout-namespace}layout--center {
+        text-align: center;
+
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            text-align: left;
+        }
+    }
+}
+
+@if ($gl-enable-layout--auto == true) {
+    /**
+     * Cause layout items to take up a non-explicit amount of width.
+     */
+    .#{$gl-layout-namespace}layout--auto,
+    %#{$gl-layout-namespace}layout--auto {
+        > .#{$gl-layout-namespace}layout__item,
+        > %#{$gl-layout-namespace}layout__item {
+            width: auto;
+        }
+    }
+}

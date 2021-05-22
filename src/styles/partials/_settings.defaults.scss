@@ -1,0 +1,39 @@
+/*!
+ * Foundations and inspiration for gl has come from inuitcss, by @csswizardry. Brilliant work!
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+///*------------------------------------*\
+//    #DEFAULTS
+//\*------------------------------------*/
+
+// These variables are global defaults; they should not be modified or
+// adjusted directly; you should predefine the variables in your own project.
+
+
+// High-level base settings.
+$gl-base-font-size:        16px !default;
+$gl-base-line-height:      22px !default;
+$gl-base-text-color:       $gray-900 !default;
+$gl-base-background-color: $white !default;
+
+
+// Namespace.
+//
+// Would you like gl’ classes to be prepended with a namespace? If so,
+// define it here.
+$gl-namespace: null !default;
+
+// Global layout class names
+// These are used in a few places for grid sizes and responsince breakpoints
+// $gl-grid-row-class: 'layout' !default;
+// $gl-grid-col-class: 'layout__item' !default;
+// $gl-grid-offset-class: 'push' !default;
+
+
+// These variables are framework variables, sourced from variables defined
+// above. Feel free to use these variables throughout your project, but do not
+// modify or reassign them.
+$gl-base-spacing-unit: 18px !default;
+$gl-base-spacing-unit--small: round($gl-base-spacing-unit / 2);
+$gl-base-spacing-unit--large: round($gl-base-spacing-unit * 2);

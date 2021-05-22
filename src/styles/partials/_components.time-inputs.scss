@@ -1,0 +1,35 @@
+.c-time {
+    align-items: stretch;
+    display: flex;
+
+    &--error {
+        .c-time__input,
+        .c-select__button {
+            border-color: $blam-500;
+
+            &:hover {
+                border-color: $gray-900;
+            }
+        }
+    }
+
+    &__input {
+        border: 1px solid $gray-600;
+        margin-right: -1px;
+        padding: 8px 10px;
+        position: relative;
+        width: 70px;
+        z-index: 0;
+        color: $black;
+
+        &:hover,
+        &:focus {
+            z-index: 100;
+        }
+    }
+
+    .c-select__button {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+}

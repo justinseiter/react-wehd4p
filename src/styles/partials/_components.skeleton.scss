@@ -1,0 +1,50 @@
+.c-skeleton {
+    &__shape {
+        background: $gray-200;
+        border-radius: 12px;
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &--pill {
+            max-width: 30%;
+            min-width: 35px;
+            height: 14px;
+        }
+
+        &--line {
+            max-width: 100%;
+            min-width: 60px;
+            height: 4px;
+        }
+
+        .c-skeleton--loading & {
+            animation: shimmer 3s infinite;
+        }
+    }
+}
+
+
+@keyframes shimmer {
+    0% {
+        background: $gray-100;
+    }
+
+    30% {
+        background: $gray-200;
+    }
+
+    50% {
+        background: $gray-100;
+    }
+
+    80% {
+        background: $gray-200;
+    }
+
+    100% {
+        background: $gray-100;
+    }
+}

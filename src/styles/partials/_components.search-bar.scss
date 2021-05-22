@@ -1,0 +1,46 @@
+/* ------------------------------------ *\
+    #SEARCH BAR
+\* ------------------------------------ */
+// Adapted from Lea Verou's CSS Secrets recipe http://bit.ly/1RAvUeb
+
+// Color Settings
+$border-color: $gray-600;
+$border-color--hover: $gray-900;
+$border-color--focus: $blue;
+$fill-color: $white;
+
+// CONTAINER
+.c-search-bar {
+    position: relative;
+    width: 225px;
+
+    // INPUT
+    .c-search-bar__input {
+        border-radius: 3px;
+        border: 1px solid $border-color;
+        background: $fill-color;
+        height: 36px;
+        width: 225px;
+        padding-left: 15px !important;
+        padding-right: 31px !important;
+
+        // HOVER STATE
+        &:hover {
+            border: 1px solid $border-color--hover;
+        }
+
+        // FOCUS STATE
+        &:focus {
+            @include input-focus-hover;
+            outline: none;
+            border: 1px solid $border-color--focus;
+        }
+    }
+
+    // MAGNIFYING GLASS POSITIONING
+    .c-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}

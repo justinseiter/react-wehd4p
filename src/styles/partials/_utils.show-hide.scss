@@ -1,0 +1,89 @@
+/* ------------------------------------ *\
+    #SHOW-HIDE
+\* ------------------------------------ */
+
+/*
+ * Hide visually and from screen readers
+ */
+.u-hidden {
+    display: none;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+@mixin hide() {
+    // scss-lint:disable ImportantRule
+    position: absolute !important;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
+    width: 1px;
+
+    /*
+    * Extends the .sr-only class to allow the element
+    * to be focusable when navigated to via the keyboard:
+    * https://www.drupal.org/node/897638
+    * This is a fast, simple solution when you need to
+    * obscure a “Skip to main content" link or an HTML5 heading.
+    * This is especially great because you can obscure any text
+    * on the page, but allow focusable text to appear when it’s
+    * appropriate (i.e. on focus).
+    */
+
+    &.focusable:active,
+    &.focusable:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        white-space: inherit;
+        width: auto;
+    }
+}
+
+.hide,
+.u-hide,
+.u-sr-only {
+    @include hide();
+}
+
+// This won't be set unless responsive settings are already enabled, so we set it false here.
+$gl-responsive-settings: false !default;
+
+@if ($gl-responsive-settings == true) {
+    @include media-query(desk) {
+        .hide-desk {
+            @include hide();
+        }
+    }
+    @include media-query(wide) {
+        .hide-wide {
+            @include hide();
+        }
+    }
+    @include media-query(retina) {
+        .hide-retina {
+            @include hide();
+        }
+    }
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+.hide-and-disable,
+.u-hide-and-disable {
+    visibility: hidden;
+    pointer-events: none;
+}

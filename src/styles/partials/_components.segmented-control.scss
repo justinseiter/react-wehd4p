@@ -1,0 +1,100 @@
+/* ------------------------------------ *\
+    #SEGMENTED CONTROLS
+\* ------------------------------------ */
+
+// BASIC SETTINGS //////////
+$segmented-btn-height: 24px;
+$segmented-btn-border-radius: 3px;
+
+// THEME CONFIG MAPS /////////////
+$c-segmented-btn-colors: (
+    themes: (
+        default: (
+            bgColor: $gray-100,
+            bgColorHover: $gray-100,
+            bgColorChecked: $gray-900,
+            borderColor: $gray-300,
+            borderColorHover: $gray-900,
+            borderColorChecked: $gray-900,
+            labelColor: $gray-900,
+            labelColorHover: $gray-900,
+            labelColorChecked: $white,
+        ),
+        primary: (
+            bgColor: $gray-100,
+            bgColorHover: $gray-100,
+            bgColorChecked: $blue,
+            borderColor: $gray-300,
+            borderColorHover: $blue,
+            borderColorChecked: $blue,
+            labelColor: $gray-900,
+            labelColorHover: $gray-900,
+            labelColorChecked: $white,
+        )
+    )
+);
+
+// CONTROL WRAPPER ///////////////
+.c-segmented-control {
+    width: 100%;
+    height: $segmented-btn-height;
+    display: flex;
+    justify-content: center;
+}
+
+// BUTTON ///////////////
+.c-segmented-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &:focus {
+        @include input-focus-hover;
+        z-index: 2;
+    }
+
+    &:first-child {
+        border-radius: $segmented-btn-border-radius 0 0 $segmented-btn-border-radius;
+    }
+
+    &:last-child {
+        border-radius: 0 $segmented-btn-border-radius $segmented-btn-border-radius 0;
+    }
+}
+
+.c-segmented-btn__label-text {
+    @include font-weight(semibold);
+    @include gl-font-size(14px);
+    width: 100%;
+    height: $segmented-btn-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    z-index: 1;
+}
+
+// COLORS //////////////////////
+@each $theme in map-keys(map-get($c-segmented-btn-colors, themes)) {
+    .c-segmented-control--#{$theme} {
+        // button
+        .c-segmented-btn {
+            background-color: map-deep-get($c-segmented-btn-colors, themes, $theme, bgColor);
+            border: 1px solid map-deep-get($c-segmented-btn-colors, themes, $theme, borderColor);
+        }
+
+        .c-segmented-btn__label-text {
+            color: map-deep-get($c-segmented-btn-colors, themes, $theme, labelColor);
+        }
+
+        [aria-checked='true'].c-segmented-btn {
+            background: map-deep-get($c-segmented-btn-colors, themes, $theme, bgColorChecked);
+            border: 1px solid map-deep-get($c-segmented-btn-colors, themes, $theme, borderColorChecked);
+
+            .c-segmented-btn__label-text {
+                color: map-deep-get($c-segmented-btn-colors, themes, $theme, labelColorChecked);
+            }
+        }
+    }
+}

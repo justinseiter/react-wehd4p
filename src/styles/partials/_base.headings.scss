@@ -1,0 +1,42 @@
+/* ------------------------------------ *\
+    #HEADINGS
+\* ------------------------------------ */
+
+/**
+ * Headings 1–6.
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$gl-heading-size-1:  36px !default;
+$gl-heading-size-2:  24px !default;
+$gl-heading-size-3:  18px !default;
+$gl-heading-size-4:  16px !default;
+$gl-heading-size-5:  14px !default;
+$gl-heading-size-6:  12px !default;
+
+h1 {
+    @include gl-font-size($gl-heading-size-1);
+    @include font-weight(light);
+}
+
+h2 {
+    @include gl-font-size($gl-heading-size-2);
+    @include font-weight(regular);
+}
+
+h3 {
+    @include gl-font-size($gl-heading-size-3);
+    @include font-weight(semibold);
+}
+
+h4 {
+    @include gl-font-size($gl-heading-size-4);
+}
+
+h5 {
+    @include gl-font-size($gl-heading-size-5);
+}
+
+h6 {
+    @include gl-font-size($gl-heading-size-6);
+}

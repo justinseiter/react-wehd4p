@@ -1,0 +1,93 @@
+/* ------------------------------------ *\
+    #RADIO BUTTONS
+\* ------------------------------------ */
+// Adapted from Lea Verou's CSS Secrets recipe http://bit.ly/1RAvUeb
+
+// Color Settings
+$bg-color: $white;
+$bg-color--checked: $blue;
+$border-color: $gray-700;
+$border-color--hover: $blue;
+$inner-color: $white;
+$label-color: $black;
+$label-font-size: $gl-base-font-size;
+$radio-button-size: 16px;
+$transition: all .1s;
+
+// SETUP ///////////////
+.c-radio-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &:focus {
+        @include input-focus-hover;
+    }
+}
+
+.c-radio-button__input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.c-radio-button__label {
+    &:hover {
+        cursor: pointer;
+
+        &::before {
+            border-color: $border-color--hover;
+        }
+    }
+}
+
+// OUTER ///////////////
+.c-radio-button__label::before {
+    content: '';
+    display: inline-block;
+    width: $radio-button-size;
+    height: $radio-button-size;
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    border-radius: 100%;
+    text-indent: .15em;
+    transition: $transition;
+    position: relative;
+    top: 3px;
+
+    // OUTER--CHECKED ///////////////
+    .c-radio-button__input:checked + & {
+        background-color: $bg-color--checked;
+        border-color: $bg-color--checked;
+        color: $bg-color;
+    }
+
+    // OUTER--FOCUSED ///////////////
+    .c-radio-button__input:focus + & {
+        @include input-focus-hover;
+    }
+}
+
+.c-radio-button__label-text {
+    color: $label-color;
+    padding-left: .5em;
+}
+
+// INNER ///////////////
+.c-radio-button__label::after {
+    content: '';
+    border-radius: 100%;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    background: $inner-color;
+    opacity: 0;
+
+    // RADIO BUTTON--CHECKED ///////////////
+    .c-radio-button__input:checked + & {
+        border-top: 0;
+        border-right: 0;
+        opacity: 1;
+    }
+}

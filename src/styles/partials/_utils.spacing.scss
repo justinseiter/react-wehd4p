@@ -1,0 +1,312 @@
+/* stylelint-disable
+    block-opening-brace-space-before,
+    declaration-block-single-line-max-declarations,
+    declaration-colon-space-after
+*/
+
+/* ------------------------------------ *\
+    #SPACING
+\* ------------------------------------ */
+
+/**
+ * Margin and padding helper classes. Use these to tweak layout on a micro
+ * level.
+ *
+ * `.(m|p)(t|r|b|l|h|v)(-|+|0) {}` = margin/padding top/right/bottom/left/horizontal/vertical less/more/none
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$gl-spacing-namespace:               $gl-namespace !default;
+
+$gl-margin:                          $gl-base-spacing-unit !default;
+$gl-margin--small:                       halve($gl-margin) !default;
+$gl-margin--tiny:                      quarter($gl-margin) !default;
+$gl-margin--large:                      double($gl-margin) !default;
+$gl-margin--huge:                    quadruple($gl-margin) !default;
+
+$gl-padding:                         $gl-base-spacing-unit !default;
+$gl-padding--small:                      halve($gl-padding) !default;
+$gl-padding--tiny:                     quarter($gl-padding) !default;
+$gl-padding--large:                     double($gl-padding) !default;
+$gl-padding--huge:                   quadruple($gl-padding) !default;
+
+$gl-enable-margins:                  false !default;
+$gl-enable-margins--tiny:            false !default;
+$gl-enable-margins--small:           false !default;
+$gl-enable-margins--large:           false !default;
+$gl-enable-margins--huge:            false !default;
+
+$gl-enable-margins--negative:        false !default;
+$gl-enable-margins--negative-tiny:   false !default;
+$gl-enable-margins--negative-small:  false !default;
+$gl-enable-margins--negative-large:  false !default;
+$gl-enable-margins--negative-huge:   false !default;
+
+$gl-enable-margins--none:            false !default;
+
+$gl-enable-paddings:                 false !default;
+$gl-enable-paddings--tiny:           false !default;
+$gl-enable-paddings--small:          false !default;
+$gl-enable-paddings--large:          false !default;
+$gl-enable-paddings--huge:           false !default;
+
+$gl-enable-paddings--none:           false !default;
+
+// scss-lint:disable ImportantRule, SpaceBeforeBrace, SpaceAfterPropertyColon
+@if ($gl-enable-margins == true) {
+    /**
+     * Margin helper classes.
+     *
+     * Add margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m     { margin:           $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-mt    { margin-top:       $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-mr    { margin-right:     $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-mb    { margin-bottom:    $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-ml    { margin-left:      $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-mh    { margin-right:     $gl-margin !important; margin-left:      $gl-margin !important; }
+    .#{$gl-spacing-namespace}u-mv    { margin-top:       $gl-margin !important; margin-bottom:    $gl-margin !important; }
+}
+
+
+@if ($gl-enable-margins--tiny == true) {
+    /**
+     * Add tiny margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m--   { margin:           $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-mt--  { margin-top:       $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-mr--  { margin-right:     $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-mb--  { margin-bottom:    $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-ml--  { margin-left:      $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-mh--  { margin-right:     $gl-margin--tiny !important; margin-left:     $gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u-mv--  { margin-top:       $gl-margin--tiny !important; margin-bottom:   $gl-margin--tiny !important; }
+}
+
+
+@if ($gl-enable-margins--small == true) {
+    /**
+     * Add small margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m-    { margin:           $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-mt-   { margin-top:       $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-mr-   { margin-right:     $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-mb-   { margin-bottom:    $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-ml-   { margin-left:      $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-mh-   { margin-right:     $gl-margin--small !important; margin-left:   $gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u-mv-   { margin-top:       $gl-margin--small !important; margin-bottom: $gl-margin--small !important; }
+}
+
+
+@if ($gl-enable-margins--large == true) {
+    /**
+     * Add large margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m\+   { margin:           $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-mt\+  { margin-top:       $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-mr\+  { margin-right:     $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-mb\+  { margin-bottom:    $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-ml\+  { margin-left:      $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-mh\+  { margin-right:     $gl-margin--large !important; margin-left:      $gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u-mv\+  { margin-top:       $gl-margin--large !important; margin-bottom:    $gl-margin--large !important; }
+}
+
+
+@if ($gl-enable-margins--huge == true) {
+    /**
+     * Add huge margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m\+\+     { margin:           $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-mt\+\+    { margin-top:       $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-mr\+\+    { margin-right:     $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-mb\+\+    { margin-bottom:    $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-ml\+\+    { margin-left:      $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-mh\+\+    { margin-right:     $gl-margin--huge !important; margin-left:   $gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u-mv\+\+    { margin-top:       $gl-margin--huge !important; margin-bottom: $gl-margin--huge !important; }
+}
+
+
+@if ($gl-enable-margins--none == true) {
+    /**
+     * Remove margins.
+     */
+
+    .#{$gl-spacing-namespace}u-m0    { margin:           0 !important; }
+    .#{$gl-spacing-namespace}u-mt0   { margin-top:       0 !important; }
+    .#{$gl-spacing-namespace}u-mr0   { margin-right:     0 !important; }
+    .#{$gl-spacing-namespace}u-mb0   { margin-bottom:    0 !important; }
+    .#{$gl-spacing-namespace}u-ml0   { margin-left:      0 !important; }
+    .#{$gl-spacing-namespace}u-mh0   { margin-right:     0 !important; margin-left:      0 !important; }
+    .#{$gl-spacing-namespace}u-mv0   { margin-top:       0 !important; margin-bottom:    0 !important; }
+}
+
+
+@if ($gl-enable-margins--negative == true) {
+    /**
+     * Negative margins.
+     */
+
+    .#{$gl-spacing-namespace}u--m    { margin:           -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--mt   { margin-top:       -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--mr   { margin-right:     -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--mb   { margin-bottom:    -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--ml   { margin-left:      -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--mh   { margin-right:     -$gl-margin !important; margin-left:      -$gl-margin !important; }
+    .#{$gl-spacing-namespace}u--mv   { margin-top:       -$gl-margin !important; margin-bottom:    -$gl-margin !important; }
+}
+
+
+@if ($gl-enable-margins--negative-tiny == true) {
+    /**
+     * Tiny negative margins.
+     */
+
+    .#{$gl-spacing-namespace}u--m--  { margin:           -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--mt-- { margin-top:       -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--mr-- { margin-right:     -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--mb-- { margin-bottom:    -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--ml-- { margin-left:      -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--mh-- { margin-right:     -$gl-margin--tiny !important; margin-left:     -$gl-margin--tiny !important; }
+    .#{$gl-spacing-namespace}u--mv-- { margin-top:       -$gl-margin--tiny !important; margin-bottom:   -$gl-margin--huge !important; }
+}
+
+
+@if ($gl-enable-margins--negative-small == true) {
+    /**
+     * Small negative margins.
+     */
+
+    .#{$gl-spacing-namespace}u--m-   { margin:           -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--mt-  { margin-top:       -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--mr-  { margin-right:     -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--mb-  { margin-bottom:    -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--ml-  { margin-left:      -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--mh-  { margin-right:     -$gl-margin--small !important; margin-left:   -$gl-margin--small !important; }
+    .#{$gl-spacing-namespace}u--mv-  { margin-top:       -$gl-margin--small !important; margin-bottom: -$gl-margin--small !important; }
+}
+
+
+@if ($gl-enable-margins--negative-large == true) {
+    /**
+     * Large negative margins.
+     */
+
+    .#{$gl-spacing-namespace}u--m\+  { margin:           -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--mt\+ { margin-top:       -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--mr\+ { margin-right:     -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--mb\+ { margin-bottom:    -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--ml\+ { margin-left:      -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--mh\+ { margin-right:     -$gl-margin--large !important; margin-left:      -$gl-margin--large !important; }
+    .#{$gl-spacing-namespace}u--mv\+ { margin-top:       -$gl-margin--large !important; margin-bottom:    -$gl-margin--large !important; }
+}
+
+
+@if ($gl-enable-margins--negative-huge == true) {
+    /**
+     * Huge negative margins.
+     */
+
+    .#{$gl-spacing-namespace}u--m\+\+    { margin:           -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--mt\+\+   { margin-top:       -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--mr\+\+   { margin-right:     -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--mb\+\+   { margin-bottom:    -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--ml\+\+   { margin-left:      -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--mh\+\+   { margin-right:     -$gl-margin--huge !important; margin-left:   -$gl-margin--huge !important; }
+    .#{$gl-spacing-namespace}u--mv\+\+   { margin-top:       -$gl-margin--huge !important; margin-bottom: -$gl-margin--huge !important; }
+}
+
+
+@if ($gl-enable-paddings == true) {
+    /**
+     * Padding helper classes.
+     *
+     * Add paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p     { padding:          $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-pt    { padding-top:      $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-pr    { padding-right:    $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-pb    { padding-bottom:   $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-pl    { padding-left:     $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-ph    { padding-right:    $gl-padding !important; padding-left:    $gl-padding !important; }
+    .#{$gl-spacing-namespace}u-pv    { padding-top:      $gl-padding !important; padding-bottom:  $gl-padding !important; }
+}
+
+
+@if ($gl-enable-paddings--tiny == true) {
+    /**
+     * Add tiny paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p--   { padding:           $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-pt--  { padding-top:       $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-pr--  { padding-right:     $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-pb--  { padding-bottom:    $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-pl--  { padding-left:      $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-ph--  { padding-right:     $gl-padding--tiny !important; padding-left:      $gl-padding--tiny !important; }
+    .#{$gl-spacing-namespace}u-pv--  { padding-top:       $gl-padding--tiny !important; padding-bottom:    $gl-padding--tiny !important; }
+}
+
+
+@if ($gl-enable-paddings--small == true) {
+    /**
+     * Add small paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p-    { padding:           $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-pt-   { padding-top:       $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-pr-   { padding-right:     $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-pb-   { padding-bottom:    $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-pl-   { padding-left:      $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-ph-   { padding-right:     $gl-padding--small !important; padding-left:    $gl-padding--small !important; }
+    .#{$gl-spacing-namespace}u-pv-   { padding-top:       $gl-padding--small !important; padding-bottom:  $gl-padding--small !important; }
+}
+
+
+@if ($gl-enable-paddings--large == true) {
+    /**
+     * Add large paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p\+   { padding:           $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-pt\+  { padding-top:       $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-pr\+  { padding-right:     $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-pb\+  { padding-bottom:    $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-pl\+  { padding-left:      $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-ph\+  { padding-right:     $gl-padding--large !important; padding-left:   $gl-padding--large !important; }
+    .#{$gl-spacing-namespace}u-pv\+  { padding-top:       $gl-padding--large !important; padding-bottom: $gl-padding--large !important; }
+}
+
+
+@if ($gl-enable-paddings--huge == true) {
+    /**
+     * Add huge paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p\+\+     { padding:           $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-pt\+\+    { padding-top:       $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-pr\+\+    { padding-right:     $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-pb\+\+    { padding-bottom:    $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-pl\+\+    { padding-left:      $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-ph\+\+    { padding-right:     $gl-padding--huge !important; padding-left:    $gl-padding--huge !important; }
+    .#{$gl-spacing-namespace}u-pv\+\+    { padding-top:       $gl-padding--huge !important; padding-bottom:  $gl-padding--huge !important; }
+}
+
+
+@if ($gl-enable-paddings--none == true) {
+    /**
+     * Remove paddings.
+     */
+
+    .#{$gl-spacing-namespace}u-p0    { padding:          0 !important; }
+    .#{$gl-spacing-namespace}u-pt0   { padding-top:      0 !important; }
+    .#{$gl-spacing-namespace}u-pr0   { padding-right:    0 !important; }
+    .#{$gl-spacing-namespace}u-pb0   { padding-bottom:   0 !important; }
+    .#{$gl-spacing-namespace}u-pl0   { padding-left:     0 !important; }
+    .#{$gl-spacing-namespace}u-ph0   { padding-right:    0 !important; padding-left:     0 !important; }
+    .#{$gl-spacing-namespace}u-pv0   { padding-top:      0 !important; padding-bottom:   0 !important; }
+}

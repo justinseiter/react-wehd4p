@@ -1,0 +1,156 @@
+@import 'vendor.react-dates';
+
+// react-dates style overrides
+// Index
+//   * Wrapper overrides, aka .SingleDatePicker
+//   * Input overrides, aka .DateInput
+//   * Calendar overrides
+
+
+// **********************************
+// Wrapper overrides
+// **********************************
+.SingleDatePicker button:focus {
+    @include input-focus-hover();
+}
+
+// **********************************
+// Input overrides
+// **********************************
+
+.SingleDatePickerInput {
+    display: flex;
+
+    &__withBorder {
+        border: 1px solid $gray-600;
+        border-radius: 0;
+    }
+
+    .SingleDatePicker__wrapper--error & {
+        border-color: $blam;
+    }
+}
+
+.SingleDatePickerInput_calendarIcon {
+    margin: 0 4px 0 0;
+    padding: 7px 12px;
+
+    .c-icon {
+        position: relative;
+        top: 1px;
+    }
+}
+
+.SingleDatePickerInput_clearDate {
+    &__default {
+        padding: 8px 12px;
+        margin: 0;
+        right: 1px;
+    }
+
+    &:focus, &:hover {
+        background: none;
+        border-radius: 0;
+    }
+}
+
+// The actual input
+.DateInput_input {
+    @include gl-font-size(16px, normal);
+    @include font-weight(regular);
+    padding: 8px 0;
+    color: $black;
+    border: 0;
+
+    &:focus {
+        @include input-focus-hover;
+    }
+
+    &--error {
+        border-color: $input-error-color;
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+}
+
+// **********************************
+// Calendar overrides
+// **********************************
+
+.DateInput_fang {
+    .SingleDatePicker__wrapper--alignRight & {
+        left: auto;
+        right: 22px;
+    }
+}
+
+.DayPicker_weekHeader {
+    @include font-weight(bold);
+    color: $black;
+
+    &_ul {
+        @include gl-font-size(18px);
+    }
+}
+
+.CalendarMonth_caption {
+    color: $black;
+    padding-bottom: 42px;
+}
+
+.CalendarDay {
+    &__default {
+        border: 0;
+        border-radius: 3px;
+        color: $black;
+
+        &:hover {
+            background: $icy-200;
+            border: 0;
+        }
+
+        &:focus {
+            @include input-focus-hover(true);
+        }
+    }
+
+    &__blocked_out_of_range,
+    &__blocked_out_of_range:hover {
+        @include font-weight(thin);
+        color: $gray-700;
+    }
+
+    // Will edit selected date or the endpoints of a range of dates
+    &__selected {
+        background: $blue;
+        border-color: $blue;
+        color: $white;
+        &:hover {
+            background: $blue;
+        }
+    }
+}
+
+.DayPickerNavigation_button {
+    position: absolute;
+    top: 20px;
+    border-radius: 3px;
+    padding: 6px;
+
+    &:focus,
+    &:hover {
+        @include input-focus-hover;
+    }
+
+    &:nth-of-type(odd) {
+        left: 22px;
+        padding-left: 4px;
+    }
+
+    &:nth-of-type(even) {
+        right: 22px;
+        padding-right: 4px;
+    }
+}

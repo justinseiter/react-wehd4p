@@ -1,0 +1,81 @@
+$gl-padding: $gl-base-spacing-unit !default;
+$gl-padding--small: halve($gl-padding) !default;
+$sb-item-height: 35px;
+$sb-item-color: $white;
+$sb-item-hover-bg: $gray-800;
+$sb-item-active-bg: $blue;
+
+
+.c-sidebar-item {
+    cursor: pointer;
+    display: block;
+    margin: $gl-padding--small 0;
+    padding: 0 $gl-padding;
+    text-decoration: none;
+}
+
+.c-sidebar-item__row {
+    @include font-weight('regular');
+    align-items: center;
+    color: $sb-item-color;
+    height: $sb-item-height;
+    text-decoration: none;
+
+    .c-sidebar-item__label {
+        @include sentence-case;
+
+        &--custom-case {
+            text-transform: inherit;
+        }
+    }
+
+    .c-sidebar-item__section-label {
+        @include gl-font-size(14px);
+        @include sentence-case;
+        margin-left: 18px;
+        color: $gray-400;
+        cursor: default;
+    }
+}
+
+.c-sidebar-item__count {
+    @include gl-font-size(11px, none);
+    text-align: right;
+}
+
+// Hover and Selected states ////////////////////
+.c-sidebar-item:hover,
+.c-sidebar-item:hover .c-sidebar-item__row {
+    background-color: $sb-item-hover-bg;
+    color: $sb-item-color;
+}
+
+.c-sidebar-item.is-selected,
+.c-sidebar-item.is-selected .c-sidebar-item__row {
+    background-color: $sb-item-active-bg;
+    color: $sb-item-color;
+}
+
+.c-sidebar-item.is-selected:hover,
+.c-sidebar-item.is-selected:hover .c-sidebar-item__row {
+    background-color: $sb-item-hover-bg;
+    color: $sb-item-color;
+}
+
+.c-sidebar-item:focus,
+.c-sidebar-item:focus .c-sidebar-item__row {
+    @include input-focus-hover;
+}
+
+hr.section-divider {
+    border: .5px solid $gray-600;
+    border-radius: 5px;
+    cursor: default;
+    margin-top: 20px;
+    margin-left: 18px;
+    margin-right: 18px;
+
+    &--space-only {
+        border: 0;
+    }
+}

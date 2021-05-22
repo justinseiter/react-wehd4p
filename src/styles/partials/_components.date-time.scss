@@ -1,0 +1,23 @@
+.c-date-time {
+    .o-control-group,
+    .c-dropdown {
+        width: 100%;
+    }
+
+    .o-control-group__item {
+        flex-grow: 1;
+
+        &:last-of-type {
+            flex-grow: 0;
+        }
+    }
+
+    .c-calendar-select .c-dropdown__control {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .c-select__button {
+        width: auto;
+    }
+}

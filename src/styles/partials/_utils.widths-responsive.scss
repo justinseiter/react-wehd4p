@@ -1,0 +1,33 @@
+/* ------------------------------------ *\
+    #WIDTHS-RESPONSIVE
+\* ------------------------------------ */
+
+/**
+ * Responsive width classes based on your responsive settings.
+ */
+
+// By default we will create wholes, halves, thirds, quarters, and fifths.
+// Predefine this Map to override.
+$gl-widths-columns: (
+    1,
+    2,
+    3,
+    4,
+    5,
+) !default;
+
+
+// Loop over our breakpoints defined in _settings.responsive.scss
+@each $breakpoint in $breakpoints {
+    // Get the name of the breakpoint.
+    $alias: nth($breakpoint, 1);
+
+    @include media-query($alias) {
+        // Loop through each of our column sizes and generate its responsive width
+        // classes.
+        @each $gl-widths-column in $gl-widths-columns {
+            @include gl-flex-widths($gl-widths-column, -#{$alias});
+            @include gl-push-widths($gl-widths-column, -#{$alias});
+        }
+    }
+}

@@ -1,0 +1,56 @@
+.c-data-list {
+    width: 100%;
+    border-collapse: separate;
+
+    &__header {
+        background-color: $gray-200;
+    }
+
+    &__cell {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 2px solid $gray-200;
+
+        &--stacked {
+            display: flex;
+            flex-flow: column wrap;
+        }
+
+        &--thumbnail {
+            padding: 0;
+        }
+    }
+
+    &__header-title {
+        cursor: pointer;
+
+        &:focus {
+            @include input-focus-hover();
+        }
+    }
+}
+
+.c-pagination {
+    &__button {
+        .c-btn {
+            min-width: 0;
+            padding: 0 12px;
+
+            .c-icon {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__summary {
+        padding: 0 5px;
+    }
+}
+
+// List filters and actions, mainly for Summary lists
+.o-datalist__controls-bar {
+    margin-bottom: 12px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}

@@ -1,0 +1,88 @@
+/**
+ * Where `margin-bottom` is concerned,this value will be the same as the
+ * base line-height. This allows us to keep a consistent vertical rhythm.
+ * As per: csswizardry.com/2012/06/single-direction-margin-declarations
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+blockquote,
+p,
+address,
+hr,
+table,
+fieldset,
+figure,
+pre,
+%margin-bottom {
+    // If this causes problems, set margin-bottom to $gl-base-spacing-unit
+    margin-bottom: ($gl-base-spacing-unit / $gl-base-font-size) * 1rem;
+}
+
+/**
+ * Emboldened elements.
+ */
+a,
+strong,
+b,
+dt {
+    @include font-weight(bold);
+}
+
+
+/**
+ * Links should act like links even without an `href`
+ */
+a {
+    cursor: pointer;
+}
+
+
+/**
+ * Figures.
+ *
+ * 1. Outdent figures by an arbitrary amount at the relevant viewport size.
+ * 2. Reindent figcaptions.
+ */
+figure {
+    @media screen and (min-width: 1380px) {
+        margin-left: -128px; /* [1] */
+    }
+
+    > img {
+        border-radius: $gl-base-round;
+    }
+}
+
+figcaption {
+    @include gl-font-size(12px);
+
+    @media screen and (min-width: 1380px) {
+        margin-left: 128px; /* [2] */
+    }
+}
+
+/**
+ * Horizontal rules.
+ */
+hr {
+    border: 0;
+    border-bottom: 1px solid $gray-300;
+    margin-bottom: $gl-base-spacing-unit - 1px;
+}
+
+
+/**
+ * Highlighted text.
+ */
+pre mark {
+    background: none;
+    border-bottom: 1px solid;
+    color: inherit;
+}

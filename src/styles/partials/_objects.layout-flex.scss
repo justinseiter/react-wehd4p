@@ -1,0 +1,247 @@
+/* ------------------------------------ *\
+    #LAYOUT
+\* ------------------------------------ */
+// TODO: layout--column
+
+/**
+ * This is an extension of the InuitCSS grid system, reworked to use flexbox. https://github.com/inuitcss/objects.layout
+ *
+ * The gl layout system uses `box-sizing: border-box;` and
+ * `display: inline-block;` to create an extremely powerful, flexible
+ * alternative to the traditional grid system. Combine the layout items with
+ * the widths found in `trumps.widths`.
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$gl-layout-namespace: $gl-namespace !default;
+
+$gl-layout-gutter: $gl-base-spacing-unit !default;
+$gl-layout-gutter--tiny: quarter($gl-layout-gutter) !default;
+$gl-layout-gutter--small: halve($gl-layout-gutter) !default;
+$gl-layout-gutter--large: double($gl-layout-gutter) !default;
+$gl-layout-gutter--huge: quadruple($gl-layout-gutter) !default;
+
+$gl-enable-layout--tiny: false !default;
+$gl-enable-layout--small: false !default;
+$gl-enable-layout--large: false !default;
+$gl-enable-layout--huge: false !default;
+$gl-enable-layout--flush: false !default;
+$gl-enable-layout--rev: false !default;
+$gl-enable-layout--middle: false !default;
+$gl-enable-layout--bottom: false !default;
+$gl-enable-layout--right: false !default;
+$gl-enable-layout--center: false !default;
+$gl-enable-layout--auto: false !default;
+
+$gl-grid-row-class: 'layout' !default;
+$gl-grid-col-class: 'layout__item' !default;
+$gl-grid-offset-class: 'push' !default;
+
+// Here we set a variable assuming that `box-sizing: border-box;` is not set
+// globally. If it has been previously been defined, the following variable will
+// be overriden and will be set to `true`.
+$gl-global-border-box: false !default;
+
+// DEFINE THE NUMBER OF COLUMNS
+$gl-widths-columns: (
+    1,
+    2,
+    3,
+    4,
+    5,
+) !default;
+
+
+// DEFAULT ROWS
+.#{$gl-layout-namespace}#{$gl-grid-row-class},
+%#{$gl-layout-namespace}#{$gl-grid-row-class} {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -($gl-layout-gutter);
+    margin-right: -($gl-layout-gutter);
+    padding-right: $gl-layout-gutter;
+}
+
+// DEFAULT COLUMNS
+.#{$gl-layout-namespace}#{$gl-grid-col-class},
+%#{$gl-layout-namespace}#{$gl-grid-col-class} {
+    box-sizing: border-box;
+    flex: 1;
+    padding-left: $gl-layout-gutter;
+
+    @if $gl-global-border-box == false {
+        box-sizing: border-box;
+    }
+}
+
+// GENERATE COLUMN CLASSES
+@include gl-flex-widths($gl-widths-columns);
+
+// GENERATE PUSH CLASSES
+@include gl-push-widths($gl-widths-columns);
+
+@if ($gl-enable-layout--tiny == true) {
+    /**
+     * Layouts with tiny gutters.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--tiny {
+        margin-left: -($gl-layout-gutter--tiny);
+        margin-right: -($gl-layout-gutter--tiny);
+        padding-right: $gl-layout-gutter--tiny;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            padding-left: $gl-layout-gutter--tiny;
+        }
+    }
+}
+
+@if ($gl-enable-layout--small == true) {
+    /**
+     * Layouts with small gutters.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--small {
+        margin-left: -($gl-layout-gutter--small);
+        margin-right: -($gl-layout-gutter--small);
+        padding-right: $gl-layout-gutter--small;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            padding-left: $gl-layout-gutter--small;
+        }
+    }
+}
+
+@if ($gl-enable-layout--large == true) {
+    /**
+     * Layouts with large gutters.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--large {
+        margin-left: -($gl-layout-gutter--large);
+        margin-right: -($gl-layout-gutter--large);
+        padding-right: $gl-layout-gutter--large;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            padding-left: $gl-layout-gutter--large;
+        }
+    }
+}
+
+@if ($gl-enable-layout--huge == true) {
+    /**
+     * Layouts with huge gutters.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--huge {
+        margin-left: -($gl-layout-gutter--huge);
+        margin-right: -($gl-layout-gutter--huge);
+        padding-right: $gl-layout-gutter--huge;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            padding-left: $gl-layout-gutter--huge;
+        }
+    }
+}
+
+@if ($gl-enable-layout--flush == true) {
+    /**
+     * Layouts with no gutters.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--flush {
+        margin-left: 0;
+        margin-right: 0;
+        padding-right: 0;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            padding-left: 0;
+        }
+    }
+}
+
+@if ($gl-enable-layout--rev == true) {
+    /**
+     * Reversed rendered order of layout items, e.g. items 1, 2, 3, 4 in your
+     * markup will display in order 4, 3, 2, 1 on your page.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--rev {
+        flex-direction: row-reverse;
+    }
+}
+
+@if ($gl-enable-layout--middle == true) {
+    /**
+     * Align layout items to the vertical centers of each other.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--middle {
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            vertical-align: middle;
+        }
+    }
+}
+
+@if ($gl-enable-layout--bottom == true) {
+    /**
+     * Align layout items to the vertical bottoms of each other.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--bottom {
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            vertical-align: bottom;
+        }
+    }
+}
+
+@if ($gl-enable-layout--right == true) {
+    /**
+     * Make the layout items fill up from the right hand side.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--right {
+        text-align: right;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            text-align: left;
+        }
+    }
+}
+
+@if ($gl-enable-layout--center == true) {
+    /**
+     * Make the layout items fill up from the center outward.
+     */
+
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--center {
+        text-align: center;
+
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            text-align: left;
+        }
+    }
+}
+
+@if ($gl-enable-layout--auto == true) {
+    /**
+     * Cause layout items to take up a non-explicit amount of width.
+     */
+    .#{$gl-layout-namespace}#{$gl-grid-row-class}--auto {
+        > .#{$gl-layout-namespace}#{$gl-grid-col-class},
+        > %#{$gl-layout-namespace}#{$gl-grid-col-class} {
+            width: auto;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+$input-field-spacing: 24px;
+$input-active-color: $blue;
+$input-hover-color: $gray-900;
+$input-error-color: $blam-700;
+$input-placeholder-color: $gray-700;
+$input-info-color: $gray-800;
+
+.o-form__heading {
+    @include gl-font-size(24px, 30px);
+    max-width: 100%;
+    margin-bottom: 14px;
+}
+
+.o-form-item {
+    margin-bottom: $input-field-spacing;
+    width: 100%;
+
+    &:last-child {
+        margin-bottom: 42px;
+    }
+}
+
+.o-form-item:last-of-type {
+    margin-bottom: 42px;
+}
+
+.o-form-item__label {
+    @include gl-font-size(14px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: .2rem;
+    color: $black;
+}
+
+.o-form-item__fieldset {
+    border: 0;
+}
+
+.o-form-item__legend {
+    @include gl-font-size(14px);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-name {
+        @include font-weight('semibold');
+        color: $black;
+    }
+
+    &-error {
+        color: $input-error-color;
+    }
+}
+
+.o-form-item__label-name {
+    @include font-weight('semibold');
+
+    &--required {
+        color: $input-error-color;
+        margin-left: .2rem;
+    }
+}
+
+.o-form-item__label-msg {
+    flex: 0 1 66%;
+    text-align: right;
+
+    &--error {
+        color: $input-error-color;
+    }
+}
+
+.o-form-item__info {
+    @include gl-font-size(14px);
+    margin-top: .5rem;
+    color: $input-info-color;
+}
+
+.o-form__actions {
+    margin-top: $input-field-spacing;
+}
