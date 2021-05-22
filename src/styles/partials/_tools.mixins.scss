@@ -92,11 +92,13 @@ $gl-use-fractions: false !default;
 // Depending on what we chose for `$gl-use-fractions`, create the relevant
 // delimiter.
 // @if ($gl-use-fractions == true) {
-//     $gl-widths-delimiter: \/ !global;
+//   $gl-widths-delimiter: \/;
 // } @else {
-//     $gl-widths-delimiter: -of- !global;
+//   $gl-widths-delimiter: -of-;
 // }
+
 $gl-widths-delimiter: -of-;
+
 @mixin gl-widths($gl-widths-columns, $gl-widths-breakpoint: null) {
   // scss-lint:disable ImportantRule
   // Loop through the number of columns for each denominator of our fractions.
